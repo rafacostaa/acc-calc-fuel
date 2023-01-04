@@ -1,16 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
-import {
-  TimePicker,
-  Input,
-  Select,
-  Form,
-  Button,
-  Card,
-  Row,
-  Col,
-  Typography,
-} from "antd";
+import { TimePicker, Input, Select, Form, Button, Typography } from "antd";
+import ResultComponent from "./components/ResultComponent/ResultComponent";
 
 const { Option } = Select;
 
@@ -41,32 +32,21 @@ function App() {
     console.log("result total laps", newRaceDuration / newLaptime2);
     console.log("fill fuel", (newRaceDuration / newLaptime2) * average);
   };
-  const onFinish = (values) => {
+  const onSubmit = (values) => {
     calcFuel(values);
     console.log("Received values of form: ", values);
   };
-  const selectAfter = (
-    <Form.Item name="typeRaceDuration" noStyle>
-      <Select>
-        <Option value="min">min</Option>
-        <Option value="laps">laps</Option>
-      </Select>
-    </Form.Item>
-  );
-  const [form] = Form.useForm();
-  const test = form.getFieldsValue("laptime");
-  console.log(test);
+
   return (
-    <div className="App" style={{ width: "400px" }}>
+    <div className="App" style={{ width: "400px", border: "1px solid red" }}>
       <Typography.Title level={2}>ACC Calc Fuel</Typography.Title>
 
       <Form
-        form={form}
-        name="normal_login"
+        name="calcForm"
         initialValues={{
           typeRaceDuration: "min",
         }}
-        onFinish={onFinish}
+        onFinish={onSubmit}
       >
         <Form.Item
           name="laptime"
@@ -80,7 +60,14 @@ function App() {
         >
           <Input
             addonBefore="Race Duration"
-            addonAfter={selectAfter}
+            addonAfter={
+              <Form.Item name="typeRaceDuration" noStyle>
+                <Select>
+                  <Option value="min">min</Option>
+                  <Option value="laps">laps</Option>
+                </Select>
+              </Form.Item>
+            }
             placeholder="Insert minutes or laps"
           />
         </Form.Item>
@@ -101,27 +88,8 @@ function App() {
           </Button>
         </Form.Item>
       </Form>
-      <div>
-        <Card>
-          <Typography.Title level={4}>Result</Typography.Title>
-          <Row>
-            <Col span={12} style={{ border: "1px solid lightGray" }}>
-              label
-            </Col>
-            <Col span={12} style={{ border: "1px solid lightGray" }}>
-              result
-            </Col>
-          </Row>
-          <Row>
-            <Col span={12} style={{ border: "1px solid lightGray" }}>
-              label2
-            </Col>
-            <Col span={12} style={{ border: "1px solid lightGray" }}>
-              result2
-            </Col>
-          </Row>
-        </Card>
-      </div>
+      <ResultComponent data={state} />
+      {/* {state.fillFuel && <ResultComponent data={state} />} */}
     </div>
   );
 }
