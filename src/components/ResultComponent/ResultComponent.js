@@ -1,6 +1,9 @@
 import React from "react";
 import { Card, Row, Col, Typography, Divider } from "antd";
 const ResultComponent = ({ data: { resultTotalLaps, fillFuel } }) => {
+  console.log("====================================");
+  console.log(resultTotalLaps);
+  console.log("====================================");
   return (
     <Card>
       <Typography.Title level={4}>Result</Typography.Title>
