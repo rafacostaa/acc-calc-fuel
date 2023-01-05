@@ -22,7 +22,10 @@ function App() {
 
   const requiredLapTime = state.typeRaceDuration === "laps";
   return (
-    <div className="App" style={{ width: "400px", border: "1px solid red" }}>
+    <div
+      className="App"
+      style={{ border: "2px solid black", borderRadius: 10 }}
+    >
       <Typography.Title level={2}>ACC Calc Fuel</Typography.Title>
 
       <Form
