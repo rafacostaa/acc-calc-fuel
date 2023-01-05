@@ -41,7 +41,12 @@ function App() {
             { required: !requiredLapTime, message: "Please input laptime" },
           ]}
         >
-          <TimePicker showNow={false} size="large" disabled={requiredLapTime} />
+          <TimePicker
+            autoFocus
+            showNow={false}
+            size="large"
+            disabled={requiredLapTime}
+          />
         </Form.Item>
         <Form.Item
           name="raceDuration"
